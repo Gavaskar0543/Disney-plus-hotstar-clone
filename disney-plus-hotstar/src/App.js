@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './Components/Header'
+import Login from './Components/Login'
 import Home from './Components/Home'
 import DetailPage from './Components/DetailPage';
 import {
@@ -22,6 +23,9 @@ function App() {
     </Route>
     <Route exact path='/details'>
       {<DetailPage />}
+      </Route>
+      <Route exact path='/login'>
+      {<Login />}
       </Route>
     </Switch>
 </Router>

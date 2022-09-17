@@ -21,13 +21,18 @@ function DetailPage() {
              <span>TRAILER</span>
          </TrailerButton>
          <AddButton>
-
+                 <span>+</span>
          </AddButton>
          <GroupWatchButton>
-
+            <img src="/images/group-icon.png" />
          </GroupWatchButton>
      </Controls>
-
+    <SubTittle>
+      2018-7m-Family,Fantasy,Kids,Animation
+    </SubTittle>
+    <Description>
+    The film is about an aging and lonely Chinese Canadian mother suffering from empty nest syndrome, who receives an unexpected second chance at motherhood when she makes a steamed bun (baozi) that comes to life
+    </Description>
     </Container>
   )
 }
@@ -35,8 +40,8 @@ function DetailPage() {
 export default DetailPage
 
 const Container=styled.div`
-min-height: calc(100vh-70px);
-padding: 0 calc(3.5vw+5px);
+min-height: calc(100vh - 70px);
+padding: 0 calc(3.5vw + 5px);
 position:relative;
 
 
@@ -63,6 +68,7 @@ height:30vh;
 min-height:170px;
 width:35vw;
 min-width:200px;
+margin-top:60px;
 
 img{
   width:100%;
@@ -74,6 +80,8 @@ img{
 
 const Controls=styled.div`
 display:flex;
+align-items:center;
+
 
 
 `
@@ -95,8 +103,44 @@ cursor:pointer;
 }
 `
 const TrailerButton =styled(PlayButton)`
-background-color:rgba(0,0,0,0.3)`
+background-color:rgba(0,0,0, 0.3);
+border:1px solid rgb(249,249,249);
+color:rgb(249,249,249);
+text-transform:uppercase;
 
-const AddButton=styled.button``
+`
 
-const GroupWatchButton =styled.button``
+const AddButton=styled.button`
+width:44px;
+height:44px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+border:2px solid white;
+background-color:rgba(0,0,0, 0.6);
+cursor:pointer;
+margin-right:16px;
+
+
+span{
+  font-size:30px;
+  color:white;
+}`
+
+const GroupWatchButton =styled(AddButton)`
+background-color:rgb(0,0,0);
+`
+const SubTittle = styled.div`
+font-size:15px;
+min-height:20px;
+margin-top:26px;`
+
+
+const Description= styled.div`
+line-height:1.4;
+font-size:20px;
+margin-top:16px;
+color:rgb(249,249,249);
+max-width:700px;
+`
