@@ -1,11 +1,70 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import { auth,provider } from '../Firebase.js'
+import {useDispatch,useSelector} from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import {
+    selectUserName,
+    selectUserPhoto,
+    setSignOut,
+    setUserLogin
+} from '../features/User/UserSlice'
 import styled from 'styled-components'
 
 function Header() {
+    const history =useHistory();
+    const userName =useSelector(selectUserName);
+    const userPhoto =useSelector(selectUserPhoto);
+    const dispatch = useDispatch();
+
+   useEffect(() =>{
+    auth.onAuthStateChanged(async(user)=>{
+        if(user){
+            dispatch(setUserLogin({
+                name:user.displayName,
+                email:user.email,
+                photo:user.photoURL
+              }))
+          
+            history.push('/')
+        }
+    })
+   })
+
+
+         const signIn = () => {
+            auth.signInWithPopup(provider)
+            .then((result)=>{
+                let user  = result.user
+              dispatch(setUserLogin({
+                name:user.displayName,
+                email:user.email,
+                photo:user.photoURL
+              }))
+            })
+            history.push('/')
+         }
+      
+         const signOut =() =>{
+            auth.signOut()
+            .then(()=>{
+                dispatch(setSignOut());
+                    history.push("/login")
+                
+            })
+         }
   return (
     <Nav>
         <Logo src="/images/logo.svg" />
-        <NavMenu>
+        {
+            !userName ? (
+                <LoginContainer>
+                      <Login  onClick={signIn}>Login</Login>
+                </LoginContainer>
+            ) :
+            <>
+            
+            
+            <NavMenu>
             <a>
                 <img src="/images/home-icon.svg" alt="img" />
                 <span>HOME</span>
@@ -32,7 +91,16 @@ function Header() {
             </a>
 
         </NavMenu>
-        <UserImg src="https://images.pexels.com/photos/5753367/pexels-photo-5753367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+
+        <UserImg 
+        onClick={signOut}
+        src="https://images.pexels.com/photos/5753367/pexels-photo-5753367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            
+            
+            </>
+        }
+       
+        
     </Nav>
   )
 }
@@ -101,4 +169,28 @@ const UserImg=styled.img`
 width:48px;
 height:48px;
 border-radius:50%;
+`
+const Login =styled.div`
+border:1px solid #f9f9f9f9;
+padding: 8px 16px;
+text-transform:uppercase;
+border-radius: 4px;
+letter-spacing: 1.5px;
+background-color: rgba(0,0,0,0.6);
+transition: all 0.2s ease 0s;
+cursor: pointer;
+
+&:hover{
+    background-color:white;
+    color: black;
+    border-color: transparent;
+}
+`
+const LoginContainer =styled.div`
+flex:1;
+display:flex;
+justify-content: flex-end;
+
+
+
 `
