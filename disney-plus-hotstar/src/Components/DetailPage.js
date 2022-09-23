@@ -1,14 +1,34 @@
 import React from 'react'
+import dbConfig from '../Firebase'
+import {useEffect, useState} from 'react'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 function DetailPage() {
+  const { id } = useParams();
+  const [Detail, setDetail] = useState();
+  useEffect(() => {
+      dbConfig.collection("Movies").doc(id).get().then((doc) => {
+          if (doc.exists) {
+              setDetail(doc.data());
+          } else {
+              console.log("Detail can't fetched");
+          }
+      })
+  }, [id]);
+  console.log("ava",Detail)
+
+  
   return (
-    <Container>
-     <Background>
-       <img src="https://cdn.vox-cdn.com/thumbor/wJ71E7nJ_4Wj0btm5seEnHNJ4Xk=/0x0:4096x2304/1200x800/filters:focal(1973x1175:2627x1829)/cdn.vox-cdn.com/uploads/chorus_image/image/60190709/BO_RGB_s120_22a_cs_pub.pub16.318.0.jpg" />
+   <Container>
+
+    {Detail &&(
+      <>
+      <Background>
+        <img src={Detail.BackgroundImg} alt="" />
      </Background>
      <ImageTittle>
-       <img src="/images/Bao.png" />
+       <img src={Detail.TitleImg} alt="" />
      </ImageTittle>
 
      <Controls>
@@ -28,12 +48,17 @@ function DetailPage() {
          </GroupWatchButton>
      </Controls>
     <SubTittle>
-      2018-7m-Family,Fantasy,Kids,Animation
-    </SubTittle>
+      {Detail.Genres}
+      </SubTittle>
     <Description>
-    The film is about an aging and lonely Chinese Canadian mother suffering from empty nest syndrome, who receives an unexpected second chance at motherhood when she makes a steamed bun (baozi) that comes to life
+    {Detail.Description}
     </Description>
+    </>
+    )}
+
+  
     </Container>
+   
   )
 }
 

@@ -30,8 +30,8 @@ const Originals = () => {
             <Title>Originals</Title>
             <Carousel {...settings}>
                 {
-                    movies && movies.map((val) => (
-                        <Wrap key={val.id}>
+                    movies && movies.map((val,index) => (
+                        <Wrap key={index}>
                             <NavLink  to={`/detail/${val.id}`}>
                                    <img src={val.CardImg} alt="img" />
                             </NavLink>
