@@ -6,18 +6,33 @@ function viewers() {
     <Container>
         <Wrap>
             <img src="/images/viewers-disney.png" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/viewers-disney.mp4" type="video/mp4" />
+        </video>
         </Wrap>
         <Wrap>
             <img src="/images/viewers-pixar.png" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/viewers-pixar.mp4" type="video/mp4" />
+        </video>
         </Wrap>
         <Wrap>
             <img src="/images/viewers-marvel.png" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/viewers-marvel.mp4" type="video/mp4" />
+        </video>
         </Wrap>
         <Wrap>
             <img src="/images/viewers-starwars.png" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/viewers-star-wars.mp4" type="video/mp4" />
+        </video>
         </Wrap>
         <Wrap>
             <img src="/images/viewers-national.png" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/viewers-national-geographic.mp4" type="video/mp4" />
+        </video>
         </Wrap>
        
     </Container>
@@ -44,13 +59,31 @@ cursor:pointer;
 transition:all 250ms cubic-bezier(0.25,0.46,0.45,0.94)0s;
 
 img{
+   
     width:100%;
     height:100%;
+    display:block;
     object-fit:cover;
+  
 }
+
+video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    opacity: 0;
+    z-index: 0;
+  }
 //&-->concat this hover child to its parent Wrap
 &:hover{
     transform:scale(1.05);
     border-color:rgba(249,249,249,0.8);
+
+    
+    video {
+        opacity: 1;
+      }
+    
 }
 `

@@ -159,7 +159,8 @@ background-color:rgb(0,0,0);
 const SubTittle = styled.div`
 font-size:15px;
 min-height:20px;
-margin-top:26px;`
+margin-top:26px;
+font-family: 'Aboreto', cursive;`
 
 
 const Description= styled.div`
@@ -168,4 +169,5 @@ font-size:20px;
 margin-top:16px;
 color:rgb(249,249,249);
 max-width:760px;
+font-family: 'Aboreto', cursive;
 `

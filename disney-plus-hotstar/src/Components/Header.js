@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { auth,provider } from '../Firebase.js'
 import {useDispatch,useSelector} from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -15,6 +15,7 @@ function Header() {
     const userName =useSelector(selectUserName);
     const userPhoto =useSelector(selectUserPhoto);
     const dispatch = useDispatch();
+    
 
    useEffect(() =>{
     auth.onAuthStateChanged(async(user)=>{
@@ -24,7 +25,7 @@ function Header() {
                 email:user.email,
                 photo:user.photoURL
               }))
-          
+             
             history.push('/')
         }
     })
@@ -39,8 +40,10 @@ function Header() {
                 name:user.displayName,
                 email:user.email,
                 photo:user.photoURL
+               
               }))
             })
+            
             history.push('/')
          }
       
@@ -94,7 +97,7 @@ function Header() {
 
         <UserImg 
         onClick={signOut}
-        src="https://images.pexels.com/photos/5753367/pexels-photo-5753367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+        src={userPhoto} />
             
             
             </>
